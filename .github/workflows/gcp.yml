@@ -1,16 +1,16 @@
 ---
 name: Build and Push Image to Google Cloud Platform
-on: 
+on:
   push:
-    branches: [ main ]
-  jobs:
-    build-push-gcr:
-      name: Build and Push to GCP
-      runs-on: ubuntu-latest
-      env:
-        IMAGE_NAME: git-ci
-        PROJECT_ID: manifest-frame-431615-j8
-      steps:
+    branches: [main]
+jobs:
+  build-push-gcr:
+    name: Build and Push to GCP
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: git-ci
+      PROJECT_ID: manifest-frame-431615-j8
+    steps:
       - name: Checkout
         use: actions/checkout@v2
 
@@ -33,4 +33,3 @@ on:
           docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-      
