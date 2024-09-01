@@ -38,7 +38,7 @@ jobs:
           gcloud auth configure-docker --quiet
           gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
 
-      - name: Push Docker Image To Container Registry (GCR)
+      - name: Push Docker Image to Artifact Registry
         env:
           GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |-
