@@ -53,11 +53,11 @@ jobs:
           docker push asia-southeast1-docker.pkg.dev/$PROJECT_ID/github-action/$IMAGE_NAME:$GIT_TAG
 
       - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
-          image: asia-southeast1-docker.pkg.dev/${{env.PROJECT_ID}}/github-action/${{env.IMAGE_NAME}}:latest
+        run: |
+          gcloud run deploy ${{ env.SERVICE }} \
+            --image asia-southeast1-docker.pkg.dev/${{env.PROJECT_ID}}/github-action/${{env.IMAGE_NAME}}:latest \
+            --region ${{ env.REGION }} \
+            --port=5000
 
       - name: Use Output
         run: curl ${{ steps.deploy.outputs.url }}
