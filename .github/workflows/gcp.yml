@@ -60,4 +60,4 @@ jobs:
             --port=5000
 
       - name: Use Output
-        run: curl ${{ steps.deploy.outputs.url }}
+        run: echo ${{ steps.deploy.outputs.url }}
